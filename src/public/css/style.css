@@ -1,0 +1,21 @@
+body {
+	font-family: Verdana, Sans-Serif;
+}
+
+h1 {
+	font-weight: bold;
+	letter-spacing: -.1em;
+}
+
+input {
+	padding: .6em;
+}
+
+#urlForm label {
+	display: block;
+	font-size: 1.5em;
+}
+
+#urlForm input {
+	font-size: 1.5em;
+}

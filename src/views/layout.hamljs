@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/style.css', media: 'screen, projection'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/screen.css', media: 'screen, projection'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/print.css', media: 'print'}
+    /[if lt IE 8]
+      %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/ie.css', media: 'screen, projection'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/style.css', media: 'screen, projection'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/redmond/jquery-ui-1.8.6.custom.css', media: 'screen, projection'}
+    
+    %title m8.is
+    %script{type: 'text/javascript', src: '/javascript/jquery/jquery-1.4.3.min.js'}
+    %script{type: 'text/javascript', src: '/javascript/jquery/jquery-ui-1.8.6.custom.min.js'}
+    %script{type: 'text/javascript', src: '/javascript/jquery/jquery.validate.min.js'}
+    
+    :javascript
+      $(function() {
+        $('button, input:submit').button();
+        $('form').validate();
+      });
+      $.validator.setDefaults({
+        //submitHandler: function() { alert("submitted!"); }
+      });
+  
+  %body
+    .container
+      %h1 m8.is
+      %hr
+      != body
