@@ -10,7 +10,7 @@ var express = require('express');
 var app = express.createServer();
 
 app.configure(function() {
-	app.set('view engine', 'hamljs');
+	app.set('view engine', 'haml');
 
 	app.use(express.staticProvider(__dirname + '/public'));
 	app.use(express.bodyDecoder());
