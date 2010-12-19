@@ -4,12 +4,10 @@
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/style.css', media: 'screen, projection'}
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/screen.css', media: 'screen, projection'}
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/print.css', media: 'print'}
-    /[if lt IE 8]
-      %link{rel: 'stylesheet', type: 'text/css', href: '/css/blueprint/ie.css', media: 'screen, projection'}
+    ="<!-- [if lt IE 8]><link rel='stylesheet' type='text/css' href='/css/blueprint/ie.css' media='screen, projection' /><![endif]-->"
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/style.css', media: 'screen, projection'}
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/redmond/jquery-ui-1.8.6.custom.css', media: 'screen, projection'}
-    /[if !IE 7]
-      %style{type:"text/css"}= "#wrap {display:table; height:100%}"
+    ="<!-- [if !IE 7]><style type='text/css'>#wrap {display:table; height:100%}</style><![endif]-->"
     
     %link{rel: 'stylesheet', type: 'text/css', href: '/css/sticky.css', media: 'screen, projection'}
     
