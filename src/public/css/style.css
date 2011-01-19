@@ -5,6 +5,9 @@ body {
 h1 {
 	font-weight: bold;
 	letter-spacing: -.1em;
+	font-size: 6em;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 input {
@@ -36,3 +39,30 @@ input {
 .flashInfo, .flashError {
 	padding: 0 0 3.2em 0;
 }
+
+.shortifiedUrl, .takeItEasy {
+	margin: 1.6em 0 0 0;
+	padding: .8em .3em .3em .3em;
+	border-top: 1px solid #ddd;
+}
+
+.takeItEasy img {
+	padding: 0 1em 0 0;
+	margin: 0 0 0 0;
+}
+
+.shortifiedUrl .link {
+	font-family: monospace;
+	font-size: 1.6em;
+	margin: 0 1em 0 0;
+}
+
+.shortifiedUrl .url {
+	margin: 0 0 0 1em;
+}
+
+.shortifiedUrl img {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+

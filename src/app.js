@@ -1,3 +1,8 @@
+String.prototype.startsWith = function(str) 
+{
+	return (this.match("^"+str) == str);
+}
+
 var server_port = 8000;
 
 var mongodb_host = 'localhost',
@@ -7,6 +12,7 @@ var mongodb_host = 'localhost',
 var express = require('express');
 var util = require('util');
 var repos = require('./repos');
+var md5 = require('./md5')
 
 repos.initialize(mongodb_host, mongodb_port, mongodb_db_name);
 
@@ -25,19 +31,36 @@ app.configure(function() {
 });
 
 app.get('/', function(req, res) {
-	res.render('index', {locals: {flash: req.flash()}});
+	res.render('index', {locals: {
+		flash: req.flash(), 
+		urls: req.session.state ? req.session.state.urls.slice().reverse() : []
+	}});
 });
 
 app.post('/shortify', function(req, res) {
 	var body = req.body;
 	var url = body.url;
 	
+	if (!(url.startsWith('http://') || url.startsWith('https://'))) {
+		url = 'http://' + url;
+	}
+	
+	var key = md5.generate(url);
+	
 	var doc = {
-		url: url
+		url: url,
+		_id: key
 	};
 
 	repos.insert(doc, function() {
-		req.flash('info', 'URL _%s_ is saved...', url);
+		req.flash('info', 'URL _%s_ has been shortified...', url);
+		
+		var session = req.session;
+		
+		if (!session.state) session.state = {created: new Date(), urls: []};
+		
+		session.state.urls.push({url: url, link: 'http://localhost:' + server_port + '/r/' + key});
+		
 		res.redirect('back');
 	});
 });

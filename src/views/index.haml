@@ -6,6 +6,20 @@
   .span-4.last
     %input.button{type:"submit", name:"submit", value:"Shortify!"}
 
+.span-24.last
+  :if urls.length > 5
+    .takeItEasy
+      %img{src:'/images/cup.png'}
+      You're obviously working pretty hard at the moment. Why don't you grab a cup of coffee?
+
+.span-24.last
+  :each url in urls
+    .shortifiedUrl    
+      %span.link
+        %a{href:url.link}= url.link
+      %img{src:'/images/bullet_go.png'}
+      %span.url= url.url
+
 :javascript
   $(function() {
     $("#urlForm .text").focus();
