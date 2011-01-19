@@ -3,7 +3,7 @@ String.prototype.startsWith = function(str)
 	return (this.match("^"+str) == str);
 }
 
-var server_port = 8000;
+var server_port = 8164;
 
 var base_url = 'http://localhost:' + server_port;
 
