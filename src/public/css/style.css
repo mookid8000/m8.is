@@ -1,6 +1,6 @@
 body {
 	font-family: Verdana, Sans-Serif;
-	background-image: url('/images/bg1.jpg');
+	background-image: url('/images/bg2.jpg');
 	background-alignment: top;
 	background-repeat: repeat-x;
 }
@@ -9,7 +9,7 @@ h1 {
 	font-weight: bold;
 	letter-spacing: -.1em;
 	font-size: 6em;
-	margin: 0 0 0 0;
+	margin: 0 0 .2em 0;
 	padding: 0 0 0 0;
 }
 
@@ -69,3 +69,13 @@ input {
 	padding: 0 0 0 0;
 }
 
+#footer {
+	background-image: url('/images/shadow.png');
+	background-alignment: top;
+	background-repeat: repeat-x;
+}
+
+#footer p {
+	margin: 0 0 0 0;
+	padding: .5em 0 0 0;
+}
