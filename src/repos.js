@@ -8,16 +8,33 @@ var assertInitialized = function() {
 };
 
 exports.initialize = function(mongodb_host, mongodb_port, database_name) {
-	db = new mongo.Db(database_name, new mongo.Server(mongodb_host, mongodb_port, {}), {});
+	db = new mongo.Db(database_name, new mongo.Server(mongodb_host, mongodb_port, {auto_reconnect: true}), {});
 };
 
-exports.insertUrl = function(doc, inserted) {
+exports.insert = function(doc, inserted) {
 	assertInitialized();
 	
 	db.open(function() {
 		db.collection('urls', function (err, coll) {
 			coll.insert(doc, function() {
 				inserted();
+			});
+		})
+	})
+};
+
+exports.getByKey = function(key, gotten, notGotten) {
+	assertInitialized();
+	
+	db.open(function() {
+		db.collection('urls', function (err, coll) {
+			coll.findOne({k: key}, function(err, doc) {
+				if (typeof doc == 'undefined') {
+					notGotten();
+				}
+				else {
+					gotten(doc.url);
+				}
 			});
 		})
 	})

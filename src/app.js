@@ -18,7 +18,6 @@ var dump = function(obj) {
 
 app.configure(function() {
 	app.set('view engine', 'haml');
-
 	app.use(express.staticProvider(__dirname + '/public'));
 	app.use(express.bodyDecoder());
 	app.use(express.cookieDecoder());
@@ -31,15 +30,26 @@ app.get('/', function(req, res) {
 
 app.post('/shortify', function(req, res) {
 	var body = req.body;
-	var url = body['url'];
+	var url = body.url;
 	
 	var doc = {
-		url: url,
+		url: url
 	};
 
-	repos.insertUrl(doc, function() {
+	repos.insert(doc, function() {
 		req.flash('info', 'URL _%s_ is saved...', url);
 		res.redirect('back');
+	});
+});
+
+app.get('/r/:key', function(req, res) {
+	var key = req.params.key;
+	
+	repos.getByKey(key, function(url) {
+		res.redirect(url);
+	}, function() {
+		req.flash('error', 'Could not find shortified url for _%s_', key)
+		res.redirect('home')
 	});
 });
 

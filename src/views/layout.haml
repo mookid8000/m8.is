@@ -34,18 +34,15 @@
           .span-24.last
             %h1 m8.is
             %hr
-            :if flash.error
-              .flashError
-                .span-2 &nbsp;
-                .span-20
-                  %span.error= flash.error
-                .span-2.last &nbsp;
-            :if flash.info
-              .flashInfo
-                .span-2 &nbsp;
-                .span-20
-                  %span.info= flash.info
-                .span-2.last &nbsp;
+            :if typeof flash != 'undefined'
+              :if flash.error
+                .flashError
+                  .span-24.last
+                    %span.error= flash.error
+              :if flash.info
+                .flashInfo
+                  .span-24.last
+                    %span.info= flash.info
             = body
     #footer
       %p
