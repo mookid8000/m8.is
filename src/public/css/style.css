@@ -1,5 +1,8 @@
 body {
 	font-family: Verdana, Sans-Serif;
+	background-image: url('/images/bg1.jpg');
+	background-alignment: top;
+	background-repeat: repeat-x;
 }
 
 h1 {

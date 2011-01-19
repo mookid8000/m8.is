@@ -5,6 +5,8 @@ String.prototype.startsWith = function(str)
 
 var server_port = 8000;
 
+var base_url = 'http://localhost:' + server_port;
+
 var mongodb_host = 'localhost',
 	mongodb_port = 27017,
 	mongodb_db_name = 'm8_development';
@@ -59,7 +61,7 @@ app.post('/shortify', function(req, res) {
 		
 		if (!session.state) session.state = {created: new Date(), urls: []};
 		
-		session.state.urls.push({url: url, link: 'http://localhost:' + server_port + '/r/' + key});
+		session.state.urls.push({url: url, link: base_url + '/r/' + key});
 		
 		res.redirect('back');
 	});
