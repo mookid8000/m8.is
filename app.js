@@ -24,7 +24,7 @@ var md5 = require('./modules/md5')
 var connect_mongodb = require('connect-mongodb');
 var express = require('express');
 
-var base_url = 'http://' + server_host + ':' + server_port;
+var base_url = 'http://' + server_host + (server_port != 80 ? ':' + server_port : '');
 
 console.log('Configured base URL: ' + base_url);
 
