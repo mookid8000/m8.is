@@ -3,18 +3,22 @@ String.prototype.startsWith = function(str)
 	return (this.match("^"+str) == str);
 }
 
+var intOrDefault = function(str, def) {
+	return str ? parseInt(str) : def;
+}
+
 var args = process.argv;
 
 /* Settings ------------------------------------------- */
 
-var server_port = args[2] ? parseInt(args[2]) : 8000;
-var server_host = args[3] ? args[3] : 'localhost';
+var server_port = intOrDefault(args[2], 8000);
+var server_host = args[3] || 'localhost';
 
-var mongodb_host = args[4] ? args[4] : 'localhost',
-	mongodb_port = args[5] ? parseInt(args[5]) : 27017,
-	mongodb_db_name = args[6] ? args[6] : 'm8_development',
-	mongodb_user = args[7] ? args[7] : null,
-	mongodb_pwd = args[8] ? args[8] : null;
+var mongodb_host = args[4] || 'localhost',
+	mongodb_port = intOrDefault(args[5], 27017),
+	mongodb_db_name = args[6] || 'm8_development',
+	mongodb_user = args[7] || null,
+	mongodb_pwd = args[8] || null;
 
 /* ---------------------------------------------------- */
 
