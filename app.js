@@ -12,83 +12,12 @@ var mongodb_host = 'localhost',
 	mongodb_db_name = 'm8_development';
 
 var express = require('express');
-var util = require('util');
-var repos = require('./modules/repos');
-var md5 = require('./modules/md5')
-var connect_mongodb = require('connect-mongodb');
 
-repos.initialize(mongodb_host, mongodb_port, mongodb_db_name);
-
-var app = express.createServer();
-
-var dump = function(obj) {
-	console.log(util.inspect(obj, false, null));
-}
-
-app.configure(function() {
-	app.set('view engine', 'haml');
-	app.use(express.staticProvider(__dirname + '/public'));
-	app.use(express.bodyDecoder());
-	app.use(express.cookieDecoder());
-	
-	var mongodb_session_store_config = function() {
-		return {
-			store: connect_mongodb({
-				dbname: mongodb_db_name,
-				host: mongodb_host,
-				port: mongodb_port
-			})};
-	};
-	
-	app.use(express.session());
+var app2 = express.createServer();
+app2.get('/', function(req, res) {
+	res.render('index');
 });
+app2.listen(server_port);
 
-app.get('/', function(req, res) {
-	res.render('index', {locals: {
-		flash: req.flash(), 
-		urls: req.session.state ? req.session.state.urls.slice().reverse() : []
-	}});
-});
 
-app.post('/shortify', function(req, res) {
-	var body = req.body;
-	var url = body.url;
-	
-	if (!(url.startsWith('http://') || url.startsWith('https://'))) {
-		url = 'http://' + url;
-	}
-	
-	var key = md5.generate(url);
-	
-	var doc = {
-		url: url,
-		_id: key
-	};
 
-	repos.insert(doc, function() {
-		req.flash('info', 'URL _%s_ has been shortified...', url);
-		
-		var session = req.session;
-		
-		if (!session.state) session.state = {created: new Date(), urls: []};
-		
-		session.state.urls.push({url: url, link: base_url + '/r/' + key});
-		
-		res.redirect('back');
-	});
-});
-
-app.get('/r/:key', function(req, res) {
-	var key = req.params.key;
-	
-	repos.getByKey(key, function(url) {
-		res.redirect(url);
-	}, function() {
-		req.flash('error', 'Could not find shortified url for _%s_', key)
-		res.redirect('home')
-	});
-});
-
-console.log("Listening on port " + server_port + "...");
-
-app.listen(server_port);
