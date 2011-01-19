@@ -31,9 +31,22 @@
     #wrap
       #main
         .container
-          %h1 m8.is
-          %hr
-          = body
+          .span-24.last
+            %h1 m8.is
+            %hr
+            :if flash.error
+              .flashError
+                .span-2 &nbsp;
+                .span-20
+                  %span.error= flash.error
+                .span-2.last &nbsp;
+            :if flash.info
+              .flashInfo
+                .span-2 &nbsp;
+                .span-20
+                  %span.info= flash.info
+                .span-2.last &nbsp;
+            = body
     #footer
       %p
-        Copyright &copy; 2010 Mogens Heller Grabe
+        Copyright &copy; 2011 Mogens Heller Grabe

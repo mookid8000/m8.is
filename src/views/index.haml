@@ -1,19 +1,16 @@
-.span-4
-  &nbsp;
-
-.span-16
-  %form#urlForm{method:"post", action:"/shortify"}
-    %div
-      %input.url{type:"text", name: "url", style:"width: 100%"}
-    %div
-      %input{type:"submit", name:"submit", value:"Shortify!", style:"width: 30%"}
-    
-.span-4.last
+%form#urlForm{method:"post", action:"/shortify"}
+  .span-2
+    &nbsp;
+  .span-15
+    %input.text{type:"text", name: "url"}
+  .span-1
+    &nbsp;
+  .span-4
+    %input.button{type:"submit", name:"submit", value:"Shortify!"}
+  .span-2.last
+    &nbsp;
 
 :javascript
   $(function() {
-    $("#urlForm").helptexts({"url": "Please type URL to make shorter here"});
+    $("#urlForm .text").focus();
   });
-
-  
-    

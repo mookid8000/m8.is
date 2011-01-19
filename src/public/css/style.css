@@ -11,12 +11,18 @@ input {
 	padding: .6em;
 }
 
-#urlForm div {
-	text-align: center;
-}
-
 #urlForm input {
 	font-size: 1.5em;
+	margin: 0 0 0 0;
+	padding: .3em .3em .3em .3em;
+}
+
+#urlForm .text {
+	width: 100%;
+}
+
+#urlForm .button {
+	width: 100%;
 }
 
 #footer {
@@ -25,4 +31,8 @@ input {
 
 .fieldHelp {
 	color: #aaa;
+}
+
+.flashInfo, .flashError {
+	padding: 0 0 3.2em 0;
 }
