@@ -47,7 +47,7 @@ exports.getByKey = function(key, gotten, notGotten) {
 	assertInitialized();
 	
 	db.collection('urls', function (err, coll) {
-		coll.findOne({k: key}, function(err, doc) {
+		coll.findOne({_id: key}, function(err, doc) {
 			if (typeof doc == 'undefined') {
 				notGotten();
 			}
