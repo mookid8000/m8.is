@@ -13,8 +13,8 @@ var mongodb_host = 'localhost',
 
 var express = require('express');
 var util = require('util');
-var repos = require('./include/repos');
-var md5 = require('./include/md5')
+var repos = require('./modules/repos');
+var md5 = require('./modules/md5')
 var connect_mongodb = require('connect-mongodb');
 
 repos.initialize(mongodb_host, mongodb_port, mongodb_db_name);
@@ -30,11 +30,17 @@ app.configure(function() {
 	app.use(express.staticProvider(__dirname + '/public'));
 	app.use(express.bodyDecoder());
 	app.use(express.cookieDecoder());
-	app.use(express.session({store: connect_mongodb({
-		dbname: mongodb_db_name,
-		host: mongodb_host,
-		port: mongodb_port
-	})}));
+	
+	var mongodb_session_store_config = function() {
+		return {
+			store: connect_mongodb({
+				dbname: mongodb_db_name,
+				host: mongodb_host,
+				port: mongodb_port
+			})};
+	};
+	
+	app.use(express.session());
 });
 
 app.get('/', function(req, res) {
